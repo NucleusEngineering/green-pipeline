@@ -1,16 +1,14 @@
 import json
-from flask import Flask
 
+from flask import Flask
 from flask import request
 from flask import Response
 
-from yahoo_finance import Share
-
-
-
 app = Flask(__name__)
 
-@app.route('/simulate_stock_price')
+from yahoo_finance import Share
+
+@app.route('/')
 def simulate_stock_price(methods=['GET', 'POST']):
 
     stock_symbol = request.args.get('stock')
@@ -25,5 +23,5 @@ def simulate_stock_price(methods=['GET', 'POST']):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    app.run(host="0.0.0.0", port=8080)
 
