@@ -7,7 +7,7 @@ from flask import Response
 
 app = Flask(__name__)
 
-@app.route('/montecarlo')
+@app.route('/')
 def montecarlo_simulation(methods=['GET', 'POST']):
   
   value       = request.args.get('value')
@@ -17,22 +17,14 @@ def montecarlo_simulation(methods=['GET', 'POST']):
 
 def monte_carlo_simulation(value, bandwidth, iterations, choice):
 
-  daily_returns = np.random.normal(0, 0.02, (n_iterations, 1))
-  stock_prices = np.zeros_like(daily_returns)
-  stock_prices[0] = stock_price
+  updates = np.random.normal(0, 0.02, (choice, 1))
+  value = np.zeros_like(updates)
+  value[0] = value
 
-  for i in range(1, n_iterations):
-    stock_prices[i] = stock_prices[i - 1] * (1 + daily_returns[i])
+  for i in range(1, iterations):
+    value[i] = value[i - 1] * (1 + updates[i])
 
-  return stock_prices
-
-if __name__ == "__main__":
-  stock_price = 100
-  n_iterations = 1000
-  stock_prices = monte_carlo_simulation(stock_price, n_iterations)
-
-  print(stock_prices)
-
+  return value
 
 
 if __name__ == "__main__":
