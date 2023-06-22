@@ -1,6 +1,5 @@
 FROM python:3.9-alpine
 WORKDIR /service
-RUN apt install libssl-dev
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY main.py .
