@@ -17,6 +17,8 @@ steps:
 
 - id: 'make-namespace'
   name: 'gcr.io/cloud-builders/kubectl'
+  env:
+    - KUBECONFIG=/workspace/.kube/config
   args: ['create','namespace','test-$SHORT_SHA']
   waitFor: ['k8s-cluster-info'] 
 
