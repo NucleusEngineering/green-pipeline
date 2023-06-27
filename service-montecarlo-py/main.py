@@ -15,6 +15,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
   iterations  = request.args.get('iteration', default=100) #represents number of trading days 
   #choice      = request.args.get('choice', default=5)
   value_float = float(value)
+  
   '''def monte_carlo_simulation(value, bandwidth, iterations, choice):
 
     updates = np.random.normal(0, 0.02, (choice, 1))
