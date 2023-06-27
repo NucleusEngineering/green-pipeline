@@ -34,17 +34,21 @@ def simulate_stock_price(methods=['GET', 'POST']):
 
     #call the service-montecarlo-py to calculate the mean of the montecarlo iterations
 
-    url_montecarlo = "http://montecarlo-svc"
-    querystring_montecarlo = {}
+    #url_montecarlo = "http://montecarlo-svc"
+    url_montecarlo = "http://127.0.0.1:8081"
+    parameters = {
+        "value" : stock_price,
+        "iterations" : 100
+    }
 
     #assign values to parameters
-    value = stock_price
-    iterations = iterations_montecarlo
-    for information in ["value", "iterations"]:      
-        querystring_montecarlo[information] = eval(information)  
+    # value = stock_price
+    # iterations = iterations_montecarlo
+    # for information in ["value", "iterations"]:      
+    #     querystring_montecarlo[information] = eval(information)  
 
     #get response
-    response_montecarlo = requests.get(f"{url_montecarlo}", params=querystring_montecarlo)
+    response_montecarlo = requests.get(f"{url_montecarlo}", params=parameters)
     response_data_montecarlo = response_montecarlo.json()
     print(response_data_montecarlo)
 

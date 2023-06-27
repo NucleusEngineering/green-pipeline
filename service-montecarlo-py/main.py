@@ -13,6 +13,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
   #bandwidth   = request.args.get('bandwidth', default=1)
   iterations  = request.args.get('iterations', default=100) #represents number of trading days 
   #choice      = request.args.get('choice', default=5)
+  iterations  = int(iterations)
   value_float = float(value)
 
   '''def monte_carlo_simulation(value, bandwidth, iterations, choice):
@@ -56,5 +57,5 @@ def montecarlo_simulation(methods=['GET', 'POST']):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    app.run(host="0.0.0.0", port=8081, debug=True)
 
