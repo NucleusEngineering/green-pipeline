@@ -21,12 +21,12 @@ steps:
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/SHORT_SHA/$SHORT_SHA/g"']
-  waitFor: ['make-namespace']
+  waitFor: ['patch-k8s-project']
 
 - id: 'deploy to staging'
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'k8s-deploy-test.yaml', '--namespace=test-$SHORT_SHA'] 
-  waitFor: ['-']
+  waitFor: ['patch-k8s-shortsha']
 
 # - id: 'get endpoint'
 #   name: 'gcr.io/cloud-builders/kubectl'
