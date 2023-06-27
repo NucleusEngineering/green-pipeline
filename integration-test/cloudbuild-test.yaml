@@ -41,11 +41,19 @@ steps:
 - id: 'deploy to staging'
   dir: integration-test
   name: 'gcr.io/cloud-builders/kubectl'
+  env:
+    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+    - KUBECONFIG=/workspace/.kube/config
   args: ['apply', '-f', 'k8s-deploy-test.yaml', '--namespace=test-$SHORT_SHA'] 
   waitFor: ['patch-k8s-shortsha']
 
 # - id: 'get endpoint'
 #   name: 'gcr.io/cloud-builders/kubectl'
+    # env:
+    # - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+    # - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+    # - KUBECONFIG=/workspace/.kube/config
 #   entrypoint: 'bash'
 #   args: 
 #   - '-c'
