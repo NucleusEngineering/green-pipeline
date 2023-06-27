@@ -11,7 +11,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
 
   value       = request.args.get('value') #represents current stock price
   #bandwidth   = request.args.get('bandwidth', default=1)
-  iterations  = request.args.get('iteration', default=100) #represents number of trading days 
+  iterations  = request.args.get('iterations', default=100) #represents number of trading days 
   #choice      = request.args.get('choice', default=5)
   value_float = float(value)
 
