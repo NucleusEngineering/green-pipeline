@@ -1,22 +1,27 @@
 steps:
 
-- id: 'make namespace'
+- id: 'k8s-getcredentials'
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'gcloud'
+  args: ['container','clusters','get-credentials','greenops-cluster','--zone','europe-north1-b','--project','greenops-demo-env']
+  waitFor: ['-']
+
+- id: 'make-namespace'
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['create','namespace','test-$SHORT_SHA']
-  waitFor: ['-'] # start immediately
+  waitFor: ['k8s-getcredentials'] 
 
 - id: 'patch-k8s-project'
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/PROJECT_ID/$PROJECT_ID/g"']
-  waitFor: ['-']
+  waitFor: ['make-namespace']
 
 - id: 'patch-k8s-shortsha'
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/SHORT_SHA/$SHORT_SHA/g"']
-  waitFor: ['-']
-
+  waitFor: ['make-namespace']
 
 - id: 'deploy to staging'
   name: 'gcr.io/cloud-builders/kubectl'
