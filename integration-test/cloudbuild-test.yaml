@@ -122,11 +122,11 @@ steps:
 #   - us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA
 
 
-- id: 'make-namespace'
-  name: 'gcr.io/cloud-builders/kubectl'
-  env:
-    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
-    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
-    - KUBECONFIG=/workspace/.kube/config
-  args: ['create','namespace','test-$SHORT_SHA']
-  waitFor: ['k8s-cluster-info'] 
+# - id: 'delete-namespace'
+#   name: 'gcr.io/cloud-builders/kubectl'
+#   env:
+#     - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+#     - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+#     - KUBECONFIG=/workspace/.kube/config
+#   args: ['delete','namespace','test-$SHORT_SHA']
+#   waitFor: ['run-tests'] 
