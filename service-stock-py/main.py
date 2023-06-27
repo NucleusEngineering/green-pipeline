@@ -5,8 +5,6 @@ from flask import Flask
 from flask import request
 from flask import Response
 
-#import yfinance as yf
-
 app = Flask(__name__)
 
 @app.route('/')
