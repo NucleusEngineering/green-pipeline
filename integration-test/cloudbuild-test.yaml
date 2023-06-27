@@ -31,7 +31,7 @@ steps:
     - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
     - KUBECONFIG=/workspace/.kube/config
   args: ['label','namespace','test-$SHORT_SHA','testonly=true']
-  waitFor: ['k8s-cluster-info'] 
+  waitFor: ['make-namespace'] 
 
 
 - id: 'patch-k8s-project'
