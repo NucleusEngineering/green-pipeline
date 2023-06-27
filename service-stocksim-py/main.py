@@ -24,13 +24,15 @@ def simulate_stock_price(methods=['GET', 'POST']):
     headers = {
     'x-api-key': "xKqFyxmTgdauCo4S1LRdD5adrSlyFK9J9if4VFfZ"
     }
-
+    
     response = requests.request("GET", url, headers=headers, params=querystring)
     response_data =  response.json()
     stock_price = response_data['quoteResponse']['result'][0]['regularMarketPrice']
 
     print(stock_price)
     
+    # montecarlo
+
     return str(stock_price)
 
 if __name__ == "__main__":
