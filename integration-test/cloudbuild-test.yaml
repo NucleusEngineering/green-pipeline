@@ -2,14 +2,23 @@ steps:
 
 - id: 'k8s-getcredentials'
   name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'gcloud'
   args: ['container','clusters','get-credentials','greenops-cluster','--zone','europe-north1-b','--project','greenops-demo-env']
   waitFor: ['-']
+
+- id: 'k8s-cluster-info'
+  name: gcr.io/cloud-builders/kubectl
+  env:
+    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+    - KUBECONFIG=/workspace/.kube/config
+  args:
+    - cluster-info
+  waitFor: ['k8s-getcredentials']
 
 - id: 'make-namespace'
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['create','namespace','test-$SHORT_SHA']
-  waitFor: ['k8s-getcredentials'] 
+  waitFor: ['k8s-cluster-info'] 
 
 - id: 'patch-k8s-project'
   name: 'gcr.io/cloud-builders/gcloud'
