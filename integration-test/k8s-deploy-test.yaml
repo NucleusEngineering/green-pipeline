@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-stock
+  labels:
+    app: service-stock
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-stock
+  template:
+    metadata:
+      labels:
+        app: service-stock
+    spec:
+      containers:
+      - name: service-stock
+        image: europe-west3-docker.pkg.dev/PROJECT_ID/greenpipeline/service-stock:SHORT_SHA
+        imagePullPolicy: Always
+        ports:
+        - protocol: TCP
+          containerPort: 8080
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "1Gi" 
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: service-stock-svc
+spec:
+  selector:
+    app: service-stock
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+

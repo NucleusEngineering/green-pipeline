@@ -1,0 +1,83 @@
+steps:
+
+- id: 'make namespace'
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['create','namespace','test-$SHORT_SHA']
+  waitFor: ['-'] # start immediately
+
+- id: 'patch k8s config'
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/PROJECT_ID/$PROJECT_ID/g"']
+  waitFor: ['-']
+
+- id: 'patch k8s config'
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/SHORT_SHA/$SHORT_SHA/g"']
+  waitFor: ['-']
+
+
+- id: 'deploy to staging'
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'k8s-deploy-test.yaml', '--namespace=test-$SHORT_SHA'] 
+  waitFor: ['-']
+
+# - id: 'get endpoint'
+#   name: 'gcr.io/cloud-builders/kubectl'
+#   entrypoint: 'bash'
+#   args: 
+#   - '-c'
+#   - |
+#     # determine which node port the service was exposed on
+#     get_nodeport() {
+#       kubectl get service cookieshop-web --namespace=test-$BUILD_ID -o=jsonpath='{.spec.ports[0].nodePort}' 
+#     }
+
+#     until [[ -n "$(get_nodeport)" ]]; do
+#         echo "querying for nodeport"
+#         sleep 3
+#     done
+
+#     echo "$(get_nodeport)" > _nodeport # save port for use in next step
+
+#     # grab the public IP of a random node
+#     # (why do this instead of a load balancer? b/c it's faster to instantiate)
+#     # (and doesn't require additional billable resources)
+#     # (we can reasonably expect the node to be durable enough to last until the test completes)
+#     get_nodeip() {
+#       kubectl get nodes --output jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}'
+#     }
+
+#     until [[ -n "$(get_nodeip)" ]]; do
+#         echo "querying for nodeip"
+#         sleep 3
+#     done
+
+#     echo $(get_nodeip) > _nodeip # save ip for use in next step
+
+#   waitFor: ['deploy to staging']
+
+# - id: 'integration tests'
+#   name: 'gcr.io/cloud-builders/curl'
+#   entrypoint: '/bin/bash'
+#   args: 
+#   - '-c'
+#   - |
+#     ### -r = retries; -i = interval; -k = keyword to search for ###
+#     ./test/test-service.sh -r 20 -i 3 -u http://$(cat _nodeip):$(cat _nodeport)
+#     ./test/test-content.sh -r 20 -i 3 -u http://$(cat _nodeip):$(cat _nodeport) -k 'Chocolate Chip'
+#   waitFor: ['get endpoint']
+
+
+
+# # Save test logs to Google Cloud Storage
+# artifacts:
+#   objects:
+#     location: gs://$_BUCKET_NAME/
+#     paths:
+#       - ${SHORT_SHA}_test_log.xml
+
+# # Store images in Google Artifact Registry
+# images:
+#   - us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA
