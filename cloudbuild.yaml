@@ -13,13 +13,13 @@ steps:
 
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    dir: service-stock-py
+    dir: service-stocksim-py
     args: ['build', '-t', 
            'europe-west3-docker.pkg.dev/$PROJECT_ID/greenpipeline/service-stocksim:$SHORT_SHA', '.']
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    dir: service-stock-py
+    dir: service-stocksim-py
     args: ['push', 'europe-west3-docker.pkg.dev/$PROJECT_ID/greenpipeline/service-stocksim:$SHORT_SHA']
 
 
