@@ -26,7 +26,6 @@ steps:
   - id: 'run-tests'
     name: 'gcr.io/cloud-builders/gcloud'
     args: ['builds','triggers','run', 'run-integration-test', '--sha=$COMMIT_SHA']
-    waitFor: ['make-namespace']
 
 
 # Store images in Google Artifact Registry
