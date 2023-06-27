@@ -25,18 +25,21 @@ steps:
   waitFor: ['k8s-cluster-info'] 
 
 - id: 'patch-k8s-project'
+  dir: integration-test
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/PROJECT_ID/$PROJECT_ID/g"']
   waitFor: ['make-namespace']
 
 - id: 'patch-k8s-shortsha'
+  dir: integration-test
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/SHORT_SHA/$SHORT_SHA/g"']
   waitFor: ['patch-k8s-project']
 
 - id: 'deploy to staging'
+  dir: integration-test
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'k8s-deploy-test.yaml', '--namespace=test-$SHORT_SHA'] 
   waitFor: ['patch-k8s-shortsha']
