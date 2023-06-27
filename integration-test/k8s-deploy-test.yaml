@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-stocksim
+  name: stocksim-app
   labels:
-    app: service-stocksim
+    app: stocksim-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: service-stocksim
+      app: stocksim-app
   template:
     metadata:
       labels:
-        app: service-stocksim
+        app: stocksim-app
     spec:
       containers:
-      - name: service-stocksim-cnt
+      - name: stocksim-cnt
         image: europe-west3-docker.pkg.dev/PROJECT_ID/greenpipeline/service-stocksim:SHORT_SHA
         imagePullPolicy: Always
         ports:
@@ -29,10 +29,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: service-stocksim-svc
+  name: stocksim-svc
 spec:
   selector:
-    app: service-stocksim
+    app: stocksim-app
   type: LoadBalancer
   ports:
   - protocol: TCP
@@ -42,21 +42,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-montecarlo
+  name: montecarlo-app
   labels:
-    app: service-montecarlo
+    app: montecarlo-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: service-montecarlo
+      app: montecarlo-app
   template:
     metadata:
       labels:
-        app: service-montecarlo
+        app: montecarlo-app
     spec:
       containers:
-      - name: service-montecarlo
+      - name: montecarlo-cnt
         image: europe-west3-docker.pkg.dev/PROJECT_ID/greenpipeline/service-montecarlo:SHORT_SHA
         imagePullPolicy: Always
         ports:
@@ -70,10 +70,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: service-montecarlo-svc
+  name: montecarlo-svc
 spec:
   selector:
-    app: service-montecarlo
+    app: montecarlo-app
   type: ClusterIP
   ports:
   - protocol: TCP
