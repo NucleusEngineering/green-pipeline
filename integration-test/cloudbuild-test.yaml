@@ -24,6 +24,16 @@ steps:
   args: ['create','namespace','test-$SHORT_SHA']
   waitFor: ['k8s-cluster-info'] 
 
+- id: 'label-namespace'
+  name: 'gcr.io/cloud-builders/kubectl'
+  env:
+    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+    - KUBECONFIG=/workspace/.kube/config
+  args: ['label','namespace','test-$SHORT_SHA','testonly=true']
+  waitFor: ['k8s-cluster-info'] 
+
+
 - id: 'patch-k8s-project'
   dir: integration-test
   name: 'gcr.io/cloud-builders/gcloud'
@@ -110,3 +120,13 @@ steps:
 # # Store images in Google Artifact Registry
 # images:
 #   - us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA
+
+
+- id: 'make-namespace'
+  name: 'gcr.io/cloud-builders/kubectl'
+  env:
+    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+    - KUBECONFIG=/workspace/.kube/config
+  args: ['create','namespace','test-$SHORT_SHA']
+  waitFor: ['k8s-cluster-info'] 
