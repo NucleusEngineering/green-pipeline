@@ -30,7 +30,7 @@ def simulate_stock_price(methods=['GET', 'POST']):
     stock_price = response_data['quoteResponse']['result'][0]['regularMarketPrice']
 
     print(stock_price)
-    
+     
     # montecarlo
 
     return str(stock_price)
