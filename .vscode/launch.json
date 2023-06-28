@@ -11,14 +11,14 @@
             "portForward": true,
             "debug": [
                 {
-                    "image": "europe-west3-docker.pkg.dev/project_id/greenpipeline/service-stocksim",
+                    "image": "europe-west3-docker.pkg.dev/greenops-demo-env/greenpipeline/service-stocksim",
                     "containerName": "stocksim-cnt",
                     "sourceFileMap": {
                         "${workspaceFolder}/service-stocksim-py": "/service"
                     }
                 },
                 {
-                    "image": "europe-west3-docker.pkg.dev/project_id/greenpipeline/service-montecarlo",
+                    "image": "europe-west3-docker.pkg.dev/greenops-demo-env/greenpipeline/service-montecarlo",
                     "containerName": "montecarlo-cnt",
                     "sourceFileMap": {
                         "${workspaceFolder}/service-montecarlo-py": "/service"

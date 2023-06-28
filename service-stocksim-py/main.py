@@ -10,7 +10,7 @@ app = Flask(__name__)
 def simulate_stock_price(methods=['GET', 'POST']):
 
     stock_symbol = request.args.get('stock')
-    iterations_montecarlo  = request.args.get('iterations', default=100) #represents number of trading days
+    iterations_montecarlo  = request.args.get('iterations', default=1000000) #represents number of trading days
     
     if stock_symbol is None or stock_symbol == "":
        return Response("URL parameter stock not provided", status=200)
@@ -52,7 +52,7 @@ def simulate_stock_price(methods=['GET', 'POST']):
     response_data_montecarlo = response_montecarlo.json()
     print(response_data_montecarlo)
 
-    return str(response_data_montecarlo)
+    return response_data_montecarlo
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
