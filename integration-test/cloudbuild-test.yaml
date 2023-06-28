@@ -80,9 +80,7 @@ steps:
     - KUBECONFIG=/workspace/.kube/config
   entrypoint: 'bash'
   args: 
-  - '-c'
-  - |
-    ./get_endpoint.sh
+    - ./get-endpoint.sh
   waitFor: ['deploy-to-test-namespace']
 
 
@@ -91,10 +89,8 @@ steps:
   dir: integration-test
   name: 'gcr.io/cloud-builders/curl'
   entrypoint: '/bin/bash'
-  args: 
-  - '-c'
-  - |    
-    ./run-service-test.sh
+  args:  
+    - ./run-service-tests.sh
   waitFor: ['get-endpoint']
 
 
