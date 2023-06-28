@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "Kubernetes: Run/Debug",
+            "type": "cloudcode.kubernetes",
+            "request": "launch",
+            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+            "imageRegistry": "europe-west3-docker.pkg.dev/greenops-demo-env",
+            "watch": true,
+            "cleanUp": false,
+            "portForward": true,
+            "debug": [
+                {
+                    "image": "europe-west3-docker.pkg.dev/project_id/greenpipeline/service-stocksim",
+                    "containerName": "stocksim-cnt",
+                    "sourceFileMap": {
+                        "${workspaceFolder}/service-stocksim-py": "/service"
+                    }
+                },
+                {
+                    "image": "europe-west3-docker.pkg.dev/project_id/greenpipeline/service-montecarlo",
+                    "containerName": "montecarlo-cnt",
+                    "sourceFileMap": {
+                        "${workspaceFolder}/service-montecarlo-py": "/service"
+                    }
+                }
+            ]
+        }
+    ]
+}
