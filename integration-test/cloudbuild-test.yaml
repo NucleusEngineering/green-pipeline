@@ -78,6 +78,7 @@ steps:
     - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
     - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
     - KUBECONFIG=/workspace/.kube/config
+    - SHORT_SHA=$SHORT_SHA
   entrypoint: 'bash'
   args: 
     - ./get-endpoint.sh
