@@ -72,6 +72,7 @@ steps:
 
 
 - id: 'get-endpoint'
+  dir: integration-test
   name: 'gcr.io/cloud-builders/kubectl'
   env:
     - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
@@ -87,6 +88,7 @@ steps:
 
 
 - id: 'run-tests'
+  dir: integration-test
   name: 'gcr.io/cloud-builders/curl'
   entrypoint: '/bin/bash'
   args: 
@@ -98,6 +100,7 @@ steps:
 
 
 - id: 'delete-namespace'
+  dir: integration-test
   name: 'gcr.io/cloud-builders/kubectl'
   env:
     - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
