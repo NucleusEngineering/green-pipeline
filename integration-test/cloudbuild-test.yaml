@@ -86,7 +86,7 @@ steps:
 
 
 
-- id: 'integration tests'
+- id: 'run-tests'
   name: 'gcr.io/cloud-builders/curl'
   entrypoint: '/bin/bash'
   args: 
