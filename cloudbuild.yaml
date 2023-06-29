@@ -2,24 +2,24 @@ steps:
 
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    dir: service-montecarlo-py
+    dir: service-montecarlo
     args: ['build', '-t', 
            'europe-west3-docker.pkg.dev/$PROJECT_ID/greenpipeline/service-montecarlo:$SHORT_SHA', '.']
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    dir: service-montecarlo-py
+    dir: service-montecarlo
     args: ['push', 'europe-west3-docker.pkg.dev/$PROJECT_ID/greenpipeline/service-montecarlo:$SHORT_SHA']
 
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    dir: service-stocksim-py
+    dir: service-stocksim
     args: ['build', '-t', 
            'europe-west3-docker.pkg.dev/$PROJECT_ID/greenpipeline/service-stocksim:$SHORT_SHA', '.']
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    dir: service-stocksim-py
+    dir: service-stocksim
     args: ['push', 'europe-west3-docker.pkg.dev/$PROJECT_ID/greenpipeline/service-stocksim:$SHORT_SHA']
 
 
