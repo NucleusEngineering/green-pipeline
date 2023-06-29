@@ -32,7 +32,7 @@ def simulate_stock_price(methods=['GET', 'POST']):
 
     #call the service-montecarlo-py to calculate the mean of the montecarlo iterations
     url_montecarlo = "http://montecarlo-svc:8080"
-
+ 
     parameters = {
         "value" : stock_price,
         "iterations" : sim_iterations
