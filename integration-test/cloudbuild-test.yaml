@@ -110,12 +110,13 @@ steps:
 - id: 'get-usage-results'
   dir: integration-test
   name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bq'
-  args: 
-    - query
-    - --nouse_legacy_sql
-    - --parameter 
-    - commitId:STRING:$SHORT_SHA
-    - <get-usage-results.sql
+  env:
+    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+    - KUBECONFIG=/workspace/.kube/config
+    - SHORT_SHA=$SHORT_SHA
+  entrypoint: '/bin/bash'
+  args:  
+    - ./get-usage-results.sh
      
   waitFor: ['delete-namespace']
