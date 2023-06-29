@@ -52,7 +52,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
   
   return montecarlo_simulation_calc(iterations, value_float)  
 
-
+ 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
 

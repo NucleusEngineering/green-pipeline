@@ -113,7 +113,9 @@ steps:
   entrypoint: 'bq'
   args: 
     - query
-    - --parameter commitId:STRING:$SHORT_SHA
-    - < get-usage-results.sql
+    - --parameter 
+    - commitId:STRING:$SHORT_SHA
+    - <
+    - get-usage-results.sql
      
   waitFor: ['delete-namespace']
