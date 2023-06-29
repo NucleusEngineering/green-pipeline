@@ -21,7 +21,7 @@ def simulate_stock_price(methods=['GET', 'POST']):
     symbols = stock_symbol
     for information in ["symbols"]:      
         querystring[information] = eval(information)  
-
+ 
     headers = {
     'x-api-key': "xKqFyxmTgdauCo4S1LRdD5adrSlyFK9J9if4VFfZ"
     }
