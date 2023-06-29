@@ -115,6 +115,7 @@ steps:
     - query
     - --parameter 
     - commitId:STRING:$SHORT_SHA
+    - --nouse_legacy_sql
     - <
     - get-usage-results.sql
      
