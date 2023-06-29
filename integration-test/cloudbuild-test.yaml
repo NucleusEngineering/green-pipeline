@@ -105,3 +105,15 @@ steps:
     - KUBECONFIG=/workspace/.kube/config
   args: ['delete','namespace','test-$SHORT_SHA']
   waitFor: ['run-tests'] 
+
+
+- id: 'get-usage-results'
+  dir: integration-test
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bq'
+  args: 
+    - query
+    - --parameter commitId:STRING:$SHORT_SHA
+    - < get-usage-results.sql
+     
+  waitFor: ['run-tests']

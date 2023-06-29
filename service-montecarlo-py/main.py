@@ -21,7 +21,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
   results = {}
  
   def montecarlo_simulation_calc(iterations, initial_stock_value):
-
+ 
     # Generate a random number generator.
     rng = np.random.default_rng()
 
@@ -39,12 +39,13 @@ def montecarlo_simulation(methods=['GET', 'POST']):
 
       # Add the new stock price to the list.
       stock_prices.append(new_stock_price)
+   
   
-      # Calc  mean & std of list of simulated stock prices.
-      results = {
-        "value_mean": np.mean(stock_prices),
-        "value_std": np.std(stock_prices)
-      }
+    # Calc  mean & std of list of simulated stock prices.
+    results = {
+      "value_mean": np.mean(stock_prices),
+      "value_std": np.std(stock_prices)
+    }
 
     # Return the results
     return results
