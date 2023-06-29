@@ -116,4 +116,4 @@ steps:
     - --parameter commitId:STRING:$SHORT_SHA
     - < get-usage-results.sql
      
-  waitFor: ['run-tests']
+  waitFor: ['delete-namespace']

@@ -45,7 +45,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
     results = {
       "value_mean": np.mean(stock_prices),
       "value_std": np.std(stock_prices)
-    }
+    }  
 
     # Return the results
     return results
