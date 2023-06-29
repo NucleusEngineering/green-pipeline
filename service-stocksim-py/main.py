@@ -37,7 +37,7 @@ def simulate_stock_price(methods=['GET', 'POST']):
         "value" : stock_price,
         "iterations" : sim_iterations
     }
-
+ 
     #execute the call
     response_montecarlo = requests.get(f"{url_montecarlo}", params=parameters)
     response_data_montecarlo = response_montecarlo.json()
