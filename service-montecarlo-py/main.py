@@ -12,7 +12,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
 
   value       = request.args.get('value') #represents current stock price
   bandwidth   = request.args.get('bandwidth', default=1.0)
-  iterations  = request.args.get('iterations', default=1000000) #represents number of trading days 
+  iterations  = request.args.get('iterations', default=1000) #represents number of trading days 
 
   # casting to the right types
   iterations  = int(iterations)
@@ -55,3 +55,4 @@ def montecarlo_simulation(methods=['GET', 'POST']):
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
 
+  

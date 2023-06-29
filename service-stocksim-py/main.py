@@ -10,7 +10,7 @@ app = Flask(__name__)
 def simulate_stock_price(methods=['GET', 'POST']):
 
     stock_symbol = request.args.get('stock')
-    sim_iterations  = request.args.get('iterations', default=1000000) #represents number of trading days
+    sim_iterations  = request.args.get('iterations', default=1000) 
     
     if stock_symbol is None or stock_symbol == "":
        return Response("URL parameter stock not provided", status=200)
