@@ -13,7 +13,6 @@ def montecarlo_simulation(methods=['GET', 'POST']):
   value       = request.args.get('value') #represents current stock price
   bandwidth   = request.args.get('bandwidth', default=1.0)
   iterations  = request.args.get('iterations', default=1000000) #represents number of trading days 
-  #choice      = request.args.get('choice', default=5)
 
   # casting to the right types
   iterations  = int(iterations)
@@ -30,7 +29,8 @@ def montecarlo_simulation(methods=['GET', 'POST']):
 
     # For each iteration, generate a random stock price.
     for _ in range(iterations):
-      # Generate a random number between 0 and 1.
+
+      # Generate a random number between 0 and 1 and calculate with bandwidth.
       random_number = (rng.random() - 0.5) * bandwidth
 
       # Calculate the new stock price.
@@ -46,7 +46,6 @@ def montecarlo_simulation(methods=['GET', 'POST']):
     }
 
   return montecarlo_simulation_calc(iterations, value_float)  
-
 
 
 if __name__ == "__main__":
