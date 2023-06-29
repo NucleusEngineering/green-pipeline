@@ -21,7 +21,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
   results = {}
  
   def montecarlo_simulation_calc(iterations, initial_stock_value):
-
+ 
     # Generate a random number generator.
     rng = np.random.default_rng()
 
