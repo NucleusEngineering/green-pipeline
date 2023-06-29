@@ -40,7 +40,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
       # Add the new stock price to the list.
       stock_prices.append(new_stock_price)
    
- 
+  
     # Calc  mean & std of list of simulated stock prices.
     results = {
       "value_mean": np.mean(stock_prices),
