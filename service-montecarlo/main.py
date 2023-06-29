@@ -18,7 +18,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
   iterations  = int(iterations)
   value_float = float(value)
   bandwidth   = float(bandwidth)
-  results = {}
+  results =  {}
  
   def montecarlo_simulation_calc(iterations, initial_stock_value):
  

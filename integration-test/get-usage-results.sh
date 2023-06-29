@@ -7,3 +7,4 @@ FROM
 `greenops-demo-env.greenpipeline_metering.usage_metering_per_commitid`
 WHERE commitId = "@commitId"
 '
+ 
