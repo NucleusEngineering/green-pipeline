@@ -13,7 +13,7 @@ func main() {
     if err != nil {
         panic(err)
     }
-}
+} 
 
 // This function simulates the stock price
 func simulateStockPrice(w http.ResponseWriter, r *http.Request) {

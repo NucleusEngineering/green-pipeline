@@ -113,10 +113,9 @@ steps:
   entrypoint: 'bq'
   args: 
     - query
+    - --nouse_legacy_sql
     - --parameter 
     - commitId:STRING:$SHORT_SHA
-    - --nouse_legacy_sql
-    - <
-    - get-usage-results.sql
+    - <get-usage-results.sql
      
   waitFor: ['delete-namespace']
