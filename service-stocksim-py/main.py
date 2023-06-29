@@ -29,7 +29,7 @@ def simulate_stock_price(methods=['GET', 'POST']):
     response = requests.request("GET", url, headers=headers, params=querystring)
     response_data =  response.json()
     stock_price = response_data['quoteResponse']['result'][0]['regularMarketPrice']
-
+ 
     #call the service-montecarlo-py to calculate the mean of the montecarlo iterations
     url_montecarlo = "http://montecarlo-svc:8080"
  
