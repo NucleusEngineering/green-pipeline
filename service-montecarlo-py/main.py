@@ -18,6 +18,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
   iterations  = int(iterations)
   value_float = float(value)
   bandwidth   = float(bandwidth)
+  results = {}
  
   def montecarlo_simulation_calc(iterations, initial_stock_value):
 
@@ -38,13 +39,16 @@ def montecarlo_simulation(methods=['GET', 'POST']):
 
       # Add the new stock price to the list.
       stock_prices.append(new_stock_price)
+  
+      # Calc  mean & std of list of simulated stock prices.
+      results = {
+        "value_mean": np.mean(stock_prices),
+        "value_std": np.std(stock_prices)
+      }
 
-    # Return mean & std of list of simulated stock prices.
-    return {
-       "value_mean": np.mean(stock_prices),
-       "value_std": np.std(stock_prices)
-    }
-
+    # Return the results
+    return results
+  
   return montecarlo_simulation_calc(iterations, value_float)  
 
 
