@@ -14,7 +14,7 @@ def simulate_stock_price(methods=['GET', 'POST']):
     
     if stock_symbol is None or stock_symbol == "":
        return Response("URL parameter stock not provided", status=200)
-
+ 
     #call API to get stock information
     url = "https://yfapi.net/v6/finance/quote"
     querystring = {}
