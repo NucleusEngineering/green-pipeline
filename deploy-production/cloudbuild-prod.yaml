@@ -34,7 +34,7 @@ steps:
   name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/PROJECT_ID/$PROJECT_ID/g"']
-  waitFor: ['make-namespace']
+  waitFor: ['k8s-cluster-info']
 
 - id: 'patch-k8s-shortsha'
   dir: integration-test
