@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 from flask import Flask
 from flask import request
@@ -23,7 +24,7 @@ def montecarlo_simulation(methods=['GET', 'POST']):
   def montecarlo_simulation_calc(iterations, initial_stock_value):
  
     # Generate a random number generator.
-    rng = np.random.default_rng()
+    rng = random
 
     # Create a list to store the simulated stock prices.
     stock_prices = []
