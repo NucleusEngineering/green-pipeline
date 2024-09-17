@@ -45,5 +45,5 @@ steps:
     - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
     - KUBECONFIG=/workspace/.kube/config
   args: ['apply', '-f', 'k8s-deploy-test.yaml', '--namespace=production'] 
-  waitFor: ['patch-k8s-shortsha']
+  waitFor: ['patch-k8s-project']
 
