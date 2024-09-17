@@ -18,16 +18,16 @@ steps:
   waitFor: ['k8s-getcredentials']
 
 
-
-- id: 'make-namespace'
-  name: 'gcr.io/cloud-builders/kubectl'
-  env:
-    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
-    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
-    - KUBECONFIG=/workspace/.kube/config
-  args: ['create','namespace','production']
-  waitFor: ['k8s-cluster-info'] 
-
+#
+#- id: 'make-namespace'
+#  name: 'gcr.io/cloud-builders/kubectl'
+#  env:
+#    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+#    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+#    - KUBECONFIG=/workspace/.kube/config
+#  args: ['create','namespace','production']
+#  waitFor: ['k8s-cluster-info'] 
+#
 
 - id: 'patch-k8s-project'
   dir: integration-test
