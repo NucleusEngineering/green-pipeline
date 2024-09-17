@@ -42,10 +42,16 @@ def montecarlo_simulation(methods=['GET', 'POST']):
    
   
     # Calc  mean & std of list of simulated stock prices.
+    total = sum(stock_prices)
+    mean = total / len(stock_prices)
+    variance = sum([(x - mean) ** 2 for x in stock_prices]) / len(stock_prices)
+    std_dev = variance ** 0.5
+
     results = {
-      "value_mean": np.mean(stock_prices),
-      "value_std": np.std(stock_prices)
+      "value_mean": mean,
+      "value_std": std_dev
     }  
+
 
     # Return the results
     return results
