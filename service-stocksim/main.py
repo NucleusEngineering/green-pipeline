@@ -29,11 +29,11 @@ def simulate_stock_price(methods=['GET', 'POST']):
     # response = requests.request("GET", url, headers=headers, params=querystring)
     # response_data =  response.json() 
     
-    if stock_symbol = "GOOG":
+    if stock_symbol == "GOOG":
         stock_price = 159.96
-    elif stock_symbol = "AAPL":
+    elif stock_symbol == "AAPL":
         stock_price = 214.83
-    else
+    else:
         stock_price = 121.83
  
     #call the service-montecarlo-py to calculate the mean of the montecarlo iterations
