@@ -36,6 +36,13 @@ steps:
   args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/PROJECT_ID/$PROJECT_ID/g"']
   waitFor: ['make-namespace']
 
+- id: 'patch-k8s-shortsha'
+  dir: integration-test
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/SHORT_SHA/$SHORT_SHA/g"']
+  waitFor: ['patch-k8s-project']
+
 
 - id: 'deploy-to-test-namespace'
   dir: integration-test
@@ -45,5 +52,5 @@ steps:
     - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
     - KUBECONFIG=/workspace/.kube/config
   args: ['apply', '-f', 'k8s-deploy-test.yaml', '--namespace=production'] 
-  waitFor: ['patch-k8s-project']
+  waitFor: ['patch-k8s-shortsha']
 
