@@ -38,8 +38,8 @@ def montecarlo_simulation(methods=['GET', 'POST']):
       new_stock_price = initial_stock_value * (1 + random_number)
 
       # Add the new stock price to the list.
-      stock_prices.append(new_stock_price)
-   
+      stock_prices.append(initial_stock_value) 
+      
   
     # Calc  mean & std of list of simulated stock prices.
     results = {

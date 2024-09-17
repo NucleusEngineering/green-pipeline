@@ -1,0 +1,49 @@
+steps:
+
+- id: 'k8s-getcredentials'
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['container','clusters','get-credentials','greenops-cluster','--zone','europe-north1-b','--project','greenops-demo-env']
+  waitFor: ['-']
+
+
+
+- id: 'k8s-cluster-info'
+  name: gcr.io/cloud-builders/kubectl
+  env:
+    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+    - KUBECONFIG=/workspace/.kube/config
+  args:
+    - cluster-info
+  waitFor: ['k8s-getcredentials']
+
+
+
+- id: 'make-namespace'
+  name: 'gcr.io/cloud-builders/kubectl'
+  env:
+    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+    - KUBECONFIG=/workspace/.kube/config
+  args: ['create','namespace','production']
+  waitFor: ['k8s-cluster-info'] 
+
+
+- id: 'patch-k8s-project'
+  dir: integration-test
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args: ['-c','find k8s*.yaml -type f | xargs sed -i "s/PROJECT_ID/$PROJECT_ID/g"']
+  waitFor: ['make-namespace']
+
+
+- id: 'deploy-to-test-namespace'
+  dir: integration-test
+  name: 'gcr.io/cloud-builders/kubectl'
+  env:
+    - CLOUDSDK_COMPUTE_ZONE=europe-north1-b
+    - CLOUDSDK_CONTAINER_CLUSTER=greenops-cluster
+    - KUBECONFIG=/workspace/.kube/config
+  args: ['apply', '-f', 'k8s-deploy-test.yaml', '--namespace=production'] 
+  waitFor: ['patch-k8s-shortsha']
+
