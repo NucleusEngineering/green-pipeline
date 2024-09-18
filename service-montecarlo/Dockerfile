@@ -1,7 +1,7 @@
-FROM python:3.9-alpine
+FROM golang:1.19
 WORKDIR /service
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY main.py .
+COPY *.go ./
+# Build
+RUN CGO_ENABLED=0 GOOS=linux go build -o /service-montecarlo
 EXPOSE 8080
-ENTRYPOINT ["python3", "main.py"]
+CMD ["/service-montecarlo"]
