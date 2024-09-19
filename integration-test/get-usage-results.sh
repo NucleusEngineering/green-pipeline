@@ -11,7 +11,7 @@ WHERE commitId = "@commitId"
 bq query --use_legacy_sql=false --parameter=commitId:STRING:$SHORT_SHA '
 SELECT 
 " Over the previous commit, the CPU usage improved by "  || ROUND(cpu_improvement,2) || " CPU-Seconds " 
-" and the memory usage improved by "  || ROUND(mem_improvement,2) || " CPU-Seconds " 
+" and the memory usage improved by "  || ROUND(mem_improvement,2) || " Memory GB-Seconds " 
   FROM `greenops-demo-env.greenpipeline_metering.commit_usage_impact` 
 WHERE commitId = @commitId
 
